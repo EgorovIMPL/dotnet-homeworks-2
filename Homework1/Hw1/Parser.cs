@@ -1,5 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
-
 namespace Hw1;
 
 public static class Parser
@@ -11,11 +9,14 @@ public static class Parser
     {
         if (IsArgLengthSupported(args))
         {
-            
-            bool tryVal1 = double.TryParse(args[0], out val1);
-            bool tryVal2 = double.TryParse(args[2], out val2);
+            var tryVal1 = double.TryParse(args[0], out val1);
+            var tryVal2 = double.TryParse(args[2], out val2);
             if (tryVal1 && tryVal2)
+            {
                 operation = ParseOperation(args[1]);
+                if (operation == CalculatorOperation.Undefined)
+                    throw new InvalidOperationException();
+            }
             else
                 throw new ArgumentException();
         }
@@ -29,15 +30,14 @@ public static class Parser
 
     private static CalculatorOperation ParseOperation(string arg)
     {
-        if (arg == "+")
-            return CalculatorOperation.Plus;
-        else if (arg == "-")
-            return CalculatorOperation.Minus;
-        else if (arg == "*")
-            return CalculatorOperation.Multiply;
-        else if (arg == "/")
-            return CalculatorOperation.Divide;
-        else
-            throw new InvalidOperationException();
+        CalculatorOperation result = arg switch
+        {
+            "+" => CalculatorOperation.Plus,
+            "-" => CalculatorOperation.Minus,
+            "/" => CalculatorOperation.Divide,
+            "*" => CalculatorOperation.Multiply,
+            _ => CalculatorOperation.Undefined
+        };
+        return result;
     }
 }
