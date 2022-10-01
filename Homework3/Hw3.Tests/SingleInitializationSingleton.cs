@@ -7,7 +7,7 @@ public class SingleInitializationSingleton
 {
     private static readonly object Locker = new();
 
-    private static SingleInitializationSingleton instance = null;
+    private static SingleInitializationSingleton _instance = null;
     private static volatile bool _isInitialized = false;
     
     public const int DefaultDelay = 3_000;
@@ -25,18 +25,18 @@ public class SingleInitializationSingleton
 
     internal static void Reset()
     {
-        instance = null;
+        _instance = null;
         _isInitialized = false;
     }
 
     public static void Initialize(int delay)
     {
-        if (_isInitialized == true)
+        if (_isInitialized)
             throw new InvalidOperationException();
         else
         {
-            _isInitialized = true;
             _delayInitialized = delay;
+            _isInitialized = true;
         }
     }
 
@@ -44,16 +44,11 @@ public class SingleInitializationSingleton
     {
         get
         {
-            if (instance == null)
+            if (_instance is null)
                 lock (Locker)
-                    if (instance == null)
-                    {
-                        if (_isInitialized == true)
-                            instance = new SingleInitializationSingleton(_delayInitialized);
-                        else
-                            instance = new SingleInitializationSingleton();
-                    }
-            return instance;
+                    if (_instance is null)
+                        _instance = _isInitialized ? new SingleInitializationSingleton(_delayInitialized) : new SingleInitializationSingleton();
+            return _instance;
         }
     }
 }
