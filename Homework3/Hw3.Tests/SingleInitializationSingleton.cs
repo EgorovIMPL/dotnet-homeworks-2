@@ -6,13 +6,13 @@ namespace Hw3.Tests;
 public class SingleInitializationSingleton
 {
     private static readonly object Locker = new();
-
-    private static Lazy<SingleInitializationSingleton> _instance = new Lazy<SingleInitializationSingleton>(() => new SingleInitializationSingleton());
     
     private static volatile bool _isInitialized = false;
     
     public const int DefaultDelay = 3_000;
     
+    private static Lazy<SingleInitializationSingleton> _instance = new Lazy<SingleInitializationSingleton>(() => new SingleInitializationSingleton());
+
     public int Delay { get; }
 
     private SingleInitializationSingleton(int delay = DefaultDelay)
@@ -32,12 +32,18 @@ public class SingleInitializationSingleton
     {
         if (_isInitialized)
             throw new InvalidOperationException();
-        lock (Locker)
+        else
         {
-            if (_isInitialized)
-                throw new InvalidOperationException();
-            _instance = new Lazy<SingleInitializationSingleton>(() => new SingleInitializationSingleton(delay)); 
-            _isInitialized = true;
+            lock (Locker)
+            {
+                if (_isInitialized)
+                    throw new InvalidOperationException();
+                else
+                {
+                    _instance = new Lazy<SingleInitializationSingleton>(() => new SingleInitializationSingleton(delay)); 
+                    _isInitialized = true;
+                }
+            }  
         }
     }
 
