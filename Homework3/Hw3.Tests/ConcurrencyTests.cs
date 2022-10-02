@@ -30,14 +30,14 @@ public class ConcurrencyTests
         var expected = Concurrency.Increment(5, 1000);
         Assert.Equal(expected, Concurrency.Index);
     }
-    
-    [Fact]
-    public void EightThreads_100KIterations_RaceIsReproduced()
-    {
-        var expected = Concurrency.Increment(8, 100_000);
-        Assert.NotEqual(expected, Concurrency.Index);
-        _toh.WriteLine($"Expected: {expected}; Actual: {Concurrency.Index}");
-    }
+    //может пройти, а может и нет
+    //[Fact]
+    //public void EightThreads_100KIterations_RaceIsReproduced()
+    //{
+    //    var expected = Concurrency.Increment(8, 100_000);
+    //    Assert.NotEqual(expected, Concurrency.Index);
+    //    _toh.WriteLine($"Expected: {expected}; Actual: {Concurrency.Index}");
+    //}
 
     [Fact]
     public void EightThreads_100KIterations_WithLock_NoRaces()
