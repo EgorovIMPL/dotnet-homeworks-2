@@ -11,7 +11,7 @@ public class SingleInitializationSingleton
     
     public const int DefaultDelay = 3_000;
     
-    private static Lazy<SingleInitializationSingleton> _instance = new Lazy<SingleInitializationSingleton>(() => new SingleInitializationSingleton());
+    private static Lazy<SingleInitializationSingleton> _instance = new (() => new SingleInitializationSingleton());
 
     public int Delay { get; }
 
@@ -32,18 +32,12 @@ public class SingleInitializationSingleton
     {
         if (_isInitialized)
             throw new InvalidOperationException();
-        else
+        lock (Locker)
         {
-            lock (Locker)
-            {
                 if (_isInitialized)
                     throw new InvalidOperationException();
-                else
-                {
-                    _instance = new Lazy<SingleInitializationSingleton>(() => new SingleInitializationSingleton(delay)); 
+                _instance = new Lazy<SingleInitializationSingleton>(() => new SingleInitializationSingleton(delay)); 
                     _isInitialized = true;
-                }
-            }  
         }
     }
 
