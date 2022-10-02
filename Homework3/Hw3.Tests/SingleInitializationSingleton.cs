@@ -34,11 +34,10 @@ public class SingleInitializationSingleton
             throw new InvalidOperationException();
         lock (Locker)
         {
-            if (!_isInitialized)
-            { 
-                _instance = new Lazy<SingleInitializationSingleton>(() => new SingleInitializationSingleton(delay)); 
-                _isInitialized = true;
-            }
+            if (_isInitialized)
+                throw new InvalidOperationException();
+            _instance = new Lazy<SingleInitializationSingleton>(() => new SingleInitializationSingleton(delay)); 
+            _isInitialized = true;
         }
     }
 
