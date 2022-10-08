@@ -11,10 +11,27 @@ type CalcOptions = {
 }
 
 let isArgLengthSupported (args : string[]) =
-    NotImplementedException() |> raise
+    args.Length = 3
 
 let parseOperation (arg : string) =
-    NotImplementedException() |> raise
+    match arg with
+    | "+" -> CalculatorOperation.Plus
+    | "-" -> CalculatorOperation.Minus
+    | "*" -> CalculatorOperation.Multiply
+    | "/" -> CalculatorOperation.Divide
+    |  _ -> ArgumentException() |> raise
+    
+let parseDouble (str:string) =
+    match Double.TryParse str with
+    | true,double -> Some double
+    | _ -> ArgumentException() |> raise
     
 let parseCalcArguments(args : string[]) =
-    NotImplementedException() |> raise
+    if args = null || not(isArgLengthSupported args) then ArgumentException() |> raise
+    else
+    {
+         arg1 = (parseDouble args[0]).Value
+         operation = parseOperation args[1]
+         arg2 = (parseDouble args[2]).Value
+    }
+    
