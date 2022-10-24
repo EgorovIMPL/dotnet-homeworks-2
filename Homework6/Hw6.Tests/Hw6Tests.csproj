@@ -25,6 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Hw6Client\Hw6Client.fsproj" />
       <ProjectReference Include="..\Hw6\Hw6.fsproj" />
       <ProjectReference Include="..\Hw6\Hw6.fsproj" />
     </ItemGroup>
