@@ -4,7 +4,7 @@ public static class Messages
 {
     public const string RequiredMessage = "Fill this field!";
 
-    public const string MaxLengthMessage = "must be less than 30 symbols";
+    public const string MaxLengthMessage = "Must be less than 30 symbols";
     
-    public const string RangeMessage = "must be in the range from 10 to 100";
+    public const string RangeMessage = "Must be in the range from 10 to 100";
 }

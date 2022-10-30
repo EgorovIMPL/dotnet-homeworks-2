@@ -20,7 +20,7 @@ public static class TestHelper
 
     private static HtmlNode GetLabelForProperty(string html, string propertyName)
     {
-        HtmlDocument doc = new HtmlDocument();
+        var doc = new HtmlDocument();
         doc.LoadHtml(html);
         return doc.DocumentNode.SelectNodes($"//label[@for=\"{propertyName}\"]").First();
     }
