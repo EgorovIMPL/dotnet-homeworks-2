@@ -12,7 +12,26 @@ public class CalculatorController : Controller
         string operation,
         string val2)
     {
-        throw new NotImplementedException();
+        double val1Parse = 0.0;
+        Operation operationParse;
+        double val2Parse = 0.0;
+
+        double result;
+        try
+        {
+            Parser.ParseCalcArguments(new[] {val1, operation, val2}, out val1Parse, out operationParse, out val2Parse);
+            result = new Calculator.Calculator().Calculate(val1Parse, operationParse, val2Parse);
+        }
+        catch (ArgumentException e)
+        {
+            return BadRequest(e.Message);
+        }
+        catch (InvalidOperationException e)
+        {
+            return BadRequest(e.Message);
+        }
+
+        return Ok(result);
     }
     
     [ExcludeFromCodeCoverage]
