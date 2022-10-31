@@ -24,7 +24,7 @@ public class CalculatorController : Controller
         }
         catch (Exception e)
         {
-            if(e is ArgumentException || e is InvalidOperationException)
+            if(e is ArgumentException or InvalidOperationException)
                 return BadRequest(e.Message);
             
             throw;
