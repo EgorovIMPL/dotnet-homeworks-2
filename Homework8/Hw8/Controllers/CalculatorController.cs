@@ -22,13 +22,12 @@ public class CalculatorController : Controller
             Parser.ParseCalcArguments(new[] {val1, operation, val2}, out val1Parse, out operationParse, out val2Parse);
             result = new Calculator.Calculator().Calculate(val1Parse, operationParse, val2Parse);
         }
-        catch (ArgumentException e)
+        catch (Exception e)
         {
-            return BadRequest(e.Message);
-        }
-        catch (InvalidOperationException e)
-        {
-            return BadRequest(e.Message);
+            if(e is ArgumentException || e is InvalidOperationException)
+                return BadRequest(e.Message);
+            
+            throw;
         }
 
         return Ok(result);
