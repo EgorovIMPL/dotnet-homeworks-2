@@ -72,9 +72,10 @@ public class CalculatorTests
     [Fact]
     public void DivideByZero_ThrowsInvalidoperationException()
     {
+        //arrange
         ICalculator calculator = new Calculator.Calculator();
 
-        //act + assert
+        //act/assert
         Assert.Throws<InvalidOperationException>(() => { calculator.Divide(1, 0); });
     }
 }
