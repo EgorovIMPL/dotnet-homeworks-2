@@ -11,4 +11,13 @@
       <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Expression\ExpressionCalculator.cs" />
+      <Compile Remove="Parser\CalculatorElement.cs" />
+      <Compile Remove="Parser\GetElements.cs" />
+      <Compile Remove="Parser\OperationHelper.cs" />
+      <Compile Remove="Parser\Parser.cs" />
+      <Compile Remove="Parser\ValueType.cs" />
+    </ItemGroup>
+
 </Project>

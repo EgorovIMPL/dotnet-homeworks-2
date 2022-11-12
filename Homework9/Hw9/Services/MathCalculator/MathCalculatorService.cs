@@ -1,4 +1,5 @@
 using Hw9.Dto;
+using Hw9.Parser;
 
 namespace Hw9.Services.MathCalculator;
 
@@ -6,6 +7,20 @@ public class MathCalculatorService : IMathCalculatorService
 {
     public async Task<CalculationMathExpressionResultDto> CalculateMathExpressionAsync(string? expression)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var parseExpression = new ExpressionParser(expression).Parse();
+            ;
+
+            var converteExpressionDictionary = new ExpressionConverter().ExpressionDictionary(parseExpression);
+
+            var result = await new CalculatorVisitor().VisitDictionary(converteExpressionDictionary);
+
+            return new CalculationMathExpressionResultDto(result);
+        }
+        catch (Exception e)
+        {
+            return new CalculationMathExpressionResultDto(e.Message);
+        }
     }
 }
