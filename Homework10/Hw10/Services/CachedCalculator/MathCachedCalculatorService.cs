@@ -33,8 +33,7 @@ public class MathCachedCalculatorService : IMathCalculatorService
 		
 			return resultDto;
 		}
-
-		await Task.Delay(1000);
+		
 		return new CalculationMathExpressionResultDto(solvingExpression.Result);	
 		
 	}
