@@ -21,7 +21,10 @@ public class CalculatorVisitor
             });
         }
 
-        return await _dictionary[first].Value;
+        var result = await _dictionary[first].Value;
+        _dictionary.Clear();
+        
+        return result;
     }
 
     private static double Add(double arg1, double arg2)
