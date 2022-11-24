@@ -93,6 +93,7 @@ public class ExpressionParser
             return Expression.Constant(res);
         }
         string message;
+        
         if (_position == 0 && _operations.Contains(next)) 
             message = StartingWithOperation;
         else if (next == ")" && _operations.Contains(previous))

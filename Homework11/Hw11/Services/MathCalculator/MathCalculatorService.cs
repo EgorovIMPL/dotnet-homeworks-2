@@ -21,7 +21,7 @@ public class MathCalculatorService : IMathCalculatorService
             var converteExpressionDictionary = new ExpressionConverter().ExpressionDictionary(parseExpression);
 
             var result = await new CalculatorVisitor().VisitDictionary(converteExpressionDictionary);
-
+            
             return result;
         }
         catch (Exception e)
