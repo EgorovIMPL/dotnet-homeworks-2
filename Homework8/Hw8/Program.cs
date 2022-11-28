@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Hw8.Calculator;
+
 namespace Hw8;
 
 [ExcludeFromCodeCoverage]
@@ -13,6 +14,7 @@ public class Program
         builder.Services.AddTransient<ICalculator, Calculator.Calculator>();
         builder.Services.AddMiniProfiler();
 
+
         var app = builder.Build();
 
         if (!app.Environment.IsDevelopment())
@@ -24,7 +26,9 @@ public class Program
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
+
         app.UseMiniProfiler();
+
         app.UseRouting();
         app.UseAuthorization();
 
