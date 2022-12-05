@@ -1,6 +1,7 @@
-﻿using Hw10.DbModels;
+using Hw10.DbModels;
 using Hw10.Dto;
 using Hw10.Services.MathCalculator;
+
 using Microsoft.Extensions.Caching.Memory;
 
 namespace Hw10.Services.CachedCalculator;
@@ -13,6 +14,7 @@ public class MathCachedCalculatorService : IMathCalculatorService
 	public MathCachedCalculatorService(IMemoryCache memoryCache, IMathCalculatorService simpleCalculator)
 	{
 		_memoryCache = memoryCache;
+
 		_simpleCalculator = simpleCalculator;
 	}
 
