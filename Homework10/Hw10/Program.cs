@@ -1,6 +1,7 @@
 // dotcover disable
 using System.Diagnostics.CodeAnalysis;
 using Hw10.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
